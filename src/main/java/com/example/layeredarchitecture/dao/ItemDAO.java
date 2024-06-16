@@ -20,4 +20,5 @@ public interface ItemDAO {
 
     public String genarateNewId();
 
+    ItemDTO findItem(String newItemCode);
 }

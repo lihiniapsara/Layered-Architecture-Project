@@ -38,7 +38,6 @@ public class PlaceOrderFormController {
     CustomerDAO customerDAO = new CustomerDAOImpl();
     OrderDAO orderDAO =new OrderDAOImpl();
 
-
     public AnchorPane root;
     public JFXButton btnPlaceOrder;
     public TextField txtCustomerName;

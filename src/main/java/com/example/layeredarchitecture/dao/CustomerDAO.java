@@ -16,4 +16,6 @@ public interface CustomerDAO {
     public boolean exitCustomers(String id) throws SQLException, ClassNotFoundException;
 
     public  String genarateNewId() throws SQLException,ClassNotFoundException;
+
+    String searchCustomer(String newValue);
 }
