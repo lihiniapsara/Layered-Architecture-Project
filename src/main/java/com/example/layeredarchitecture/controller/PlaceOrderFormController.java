@@ -112,14 +112,12 @@ public class PlaceOrderFormController {
                         String name = customerDAO.searchCustomer(newValue);
 
 
-                        txtCustomerName.setText(customerDTO.getName());
+                        txtCustomerName.setText(name);
                     } catch (SQLException e) {
                         new Alert(Alert.AlertType.ERROR, "Failed to find the customer " + newValue + "" + e).show();
                     }
 
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                } catch (ClassNotFoundException e) {
+               } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }
             } else {
@@ -213,7 +211,7 @@ public class PlaceOrderFormController {
             Statement stm = connection.createStatement();
             ResultSet rst = stm.executeQuery("SELECT oid FROM `Orders` ORDER BY oid DESC LIMIT 1;");
 */
-            String id = orderDAO.getOrderId;
+            String id = orderDAO.getOrderId();
             return id;
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Failed to generate a new order id").show();
@@ -251,7 +249,7 @@ public class PlaceOrderFormController {
             ArrayList<ItemDTO> itemDTOS = new ArrayList<>(itemDAO.getAllItems());
             for (ItemDTO itemDTO : itemDTOS ) {
 
-                cmbItemCode.getItems().add(rst.getString("code"));
+                cmbItemCode.getItems().add(itemDTO.getCode());
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();

@@ -1,4 +1,4 @@
 package com.example.layeredarchitecture.dao;
 
-public class OrderDetailDAO {
+public interface OrderDetailDAO {
 }
