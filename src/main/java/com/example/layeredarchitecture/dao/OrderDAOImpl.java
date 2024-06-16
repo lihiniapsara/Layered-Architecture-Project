@@ -7,7 +7,7 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.List;
 
-public class OrderDAOImpl {
+public class OrderDAOImpl implements OrderDAO {
     public String getOrderId() throws SQLException, ClassNotFoundException {
         Connection connection = DBConnection.getDbConnection().getConnection();
         Statement stm = connection.createStatement();
@@ -17,19 +17,19 @@ public class OrderDAOImpl {
 
     }
 
-    public boolean placeOrder(String orderId, LocalDate orderDate, String customerId, List<OrderDetailDTO> orderDetails) throws SQLException {
+    public boolean placeOrder(String orderCode, LocalDate orderDate, String customerId, List<OrderDetailDTO> orderDetails) throws SQLException {
         Connection connection = null;
         try {
             connection = DBConnection.getDbConnection().getConnection();
             PreparedStatement stm = connection.prepareStatement("SELECT oid FROM `Orders` WHERE oid=?");
-            stm.setString(1, orderId);
+            stm.setString(1, orderCode);
             if (stm.executeQuery().next()) {
 
             }
 
             connection.setAutoCommit(false);
             stm = connection.prepareStatement("INSERT INTO `Orders` (oid, date, customerID) VALUES (?,?,?)");
-            stm.setString(1, orderId);
+            stm.setString(1, orderCode);
             stm.setDate(2, Date.valueOf(orderDate));
             stm.setString(3, customerId);
 
@@ -40,7 +40,7 @@ public class OrderDAOImpl {
             }
 
             OrderDetailDAOImpl orderDetailDAO = new OrderDetailDAOImpl();
-            boolean odsaved = orderDetailDAO.saveorderDetail(orderDetails,orderId,connection) ;
+            boolean odsaved = orderDetailDAO.saveorderDetail(orderDetails,orderCode,connection) ;
 
 
             if (!odsaved) {

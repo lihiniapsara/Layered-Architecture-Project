@@ -249,21 +249,20 @@ public class ManageItemsFormController {
 
     private String generateNewId() {
         try {
-            /*Connection connection = DBConnection.getDbConnection().getConnection();
-            ResultSet rst = connection.createStatement().executeQuery("SELECT code FROM Item ORDER BY code DESC LIMIT 1;");
-            if (rst.next()) {*/
-            String id = itemDAO.genarateNewId();
-            if (id!=null){
-                int newItemId = Integer.parseInt(id.replace("I00-", "")) + 1;
+
+            String idd = itemDAO.genarateNewId();
+
+            if (idd !=null) {
+                int newItemId = Integer.parseInt(idd.replace("I00-", "")) + 1;
                 return String.format("I00-%03d", newItemId);
             } else {
                 return "I00-001";
             }
-            } catch (SQLException e) {
-                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         return "I00-001";
     }
 

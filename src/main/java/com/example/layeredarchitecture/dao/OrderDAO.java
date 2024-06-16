@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface OrderDAO {
     public String getOrderId() throws SQLException,ClassNotFoundException;
-    boolean placeOrder(String orderId, LocalDate orderDate, String customerId, List<OrderDetailDTO> orderDetails);
+    boolean placeOrder(String orderCode, LocalDate orderDate, String customerId, List<OrderDetailDTO> orderDetails) throws SQLException;
 }

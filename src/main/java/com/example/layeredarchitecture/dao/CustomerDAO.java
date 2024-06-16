@@ -17,5 +17,5 @@ public interface CustomerDAO {
 
     public  String genarateNewId() throws SQLException,ClassNotFoundException;
 
-    String searchCustomer(String newValue);
+    String searchCustomer(String newValue) throws SQLException, ClassNotFoundException;
 }

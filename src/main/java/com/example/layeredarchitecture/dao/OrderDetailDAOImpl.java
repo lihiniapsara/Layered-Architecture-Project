@@ -23,10 +23,11 @@ public class OrderDetailDAOImpl {
                 return false;
             }
             ItemDAOImpl itemDAO = new ItemDAOImpl();
-            boolean isitemupdate = itemDAO.(connection, orderDetails);
+            boolean isitemupdate = itemDAO.updatedata(connection, orderDetails);
             if (!isitemupdate) {
                 return false;
             }
+
         }
         return true;
     }

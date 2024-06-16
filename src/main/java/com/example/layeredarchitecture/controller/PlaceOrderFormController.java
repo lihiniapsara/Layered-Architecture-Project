@@ -142,8 +142,8 @@ public class PlaceOrderFormController {
                     pstm.setString(1, newItemCode + "");
                     ResultSet rst = pstm.executeQuery();
                     rst.next();*/
-                    ItemDTO item = new ItemDTO(newItemCode + "", rst.getString("description"), rst.getBigDecimal("unitPrice"), rst.getInt("qtyOnHand"));
-                    ItemDTO itemDTO = itemDAO.findItem(newItemCode);
+                   // ItemDTO item = new ItemDTO(newItemCode + "", rst.getString("description"), rst.getBigDecimal("unitPrice"), rst.getInt("qtyOnHand"));
+                    ItemDTO item = itemDAO.findItem(newItemCode);
 
                     txtDescription.setText(item.getDescription());
                     txtUnitPrice.setText(item.getUnitPrice().setScale(2).toString());
@@ -228,6 +228,8 @@ public class PlaceOrderFormController {
             ResultSet rst = stm.executeQuery("SELECT * FROM Customer");
 
             while (rst.next())*/
+            ArrayList<CustomerDTO> customerDTOS = customerDAO.getAllCustomer();
+
             for (CustomerDTO customerDAOS : customerDTOS){
                 cmbCustomerId.getItems().add(customerDAOS.getId());
             }
@@ -324,8 +326,9 @@ public class PlaceOrderFormController {
     public void txtQty_OnAction(ActionEvent actionEvent) {
     }
 
-    public void btnPlaceOrder_OnAction(ActionEvent actionEvent) {
-        boolean b = saveOrder(orderId, LocalDate.now(), cmbCustomerId.getValue(),
+    public void btnPlaceOrder_OnAction(ActionEvent actionEvent) throws SQLException {
+        boolean b = saveOrder
+                (orderId, LocalDate.now(), cmbCustomerId.getValue(),
                 tblOrderDetails.getItems().stream().map(tm -> new OrderDetailDTO(tm.getCode(), tm.getQty(), tm.getUnitPrice())).collect(Collectors.toList()));
 
         if (b) {
@@ -343,12 +346,12 @@ public class PlaceOrderFormController {
         calculateTotal();
     }
 
-    public boolean saveOrder(String orderId, LocalDate orderDate, String customerId, List<OrderDetailDTO> orderDetails) {
+    public boolean saveOrder(String orderId, LocalDate orderDate, String customerId, List<OrderDetailDTO> orderDetails) throws SQLException {
         /*Transaction*/
 
 
-        boolean orderplaced=orderDAO.placeOrder(orderId,orderDate,customerId,orderDetails);
-        return orderplaced;
+        return orderDAO.placeOrder(orderId,orderDate,customerId,orderDetails);
+
 
 
     }
