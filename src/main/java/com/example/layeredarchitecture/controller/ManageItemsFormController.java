@@ -247,7 +247,7 @@ public class ManageItemsFormController {
     }
 
 
-    private String generateNewId() {
+   /* private String generateNewId() {
         try {
 
             String idd = itemDAO.genarateNewId();
@@ -258,6 +258,24 @@ public class ManageItemsFormController {
             } else {
                 return "I00-001";
             }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return "I00-001";
+    }*/
+    private String generateNewId()  {
+        try {
+           /* Connection connection = DBConnection.getDbConnection().getConnection();
+            ResultSet rst = connection.createStatement().executeQuery("SELECT code FROM Item ORDER BY code DESC LIMIT 1;");
+            if (rst.next()) {*/
+                String code = itemDAO.genarateNewId();
+                if (code==null){
+                return "I00-001";
+            }
+                // https://github.com/lihiniapsara/Layered-Architecture-Project.git
+                return code;
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         } catch (ClassNotFoundException e) {

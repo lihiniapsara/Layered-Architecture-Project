@@ -67,10 +67,11 @@ public class ItemDAOImpl implements ItemDAO{
         Connection connection = DBConnection.getDbConnection().getConnection();
         ResultSet rst = connection.createStatement().executeQuery("SELECT code FROM Item ORDER BY code DESC LIMIT 1;");
         if (rst.next()){
-            return rst.getString("id");
+            return rst.getString("code");
         }
         return null;
     }
+
 
 
 public ItemDTO findItem(String newItemCode) throws SQLException, ClassNotFoundException {
