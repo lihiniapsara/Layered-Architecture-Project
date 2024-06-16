@@ -274,8 +274,7 @@ public class ManageItemsFormController {
                 if (code==null){
                 return "I00-001";
             }
-                // https://github.com/lihiniapsara/Layered-Architecture-Project.git
-            // hhh //
+
                 return code;
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
